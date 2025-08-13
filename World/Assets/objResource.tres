@@ -1,16 +1,28 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b6itvr0kmj5xg"]
 
-[ext_resource type="Texture2D" uid="uid://d320p0ttmruaw" path="res://World/Assets/obj.png" id="1_o422t"]
+[ext_resource type="Texture2D" uid="uid://bgmixf8wngndb" path="res://World/Assets/Objects.png" id="1_o422t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xx2yb"]
 texture = ExtResource("1_o422t")
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_1 = true
+0:0/0/custom_data_2 = "Goblin"
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/custom_data_0 = true
+2:0/0 = 0
+2:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 30
-sources/3 = SubResource("TileSetAtlasSource_xx2yb")
-tile_proxies/coords_level = [[0, Vector2i(0, 0)], [3, Vector2i(0, 0)], [1, Vector2i(0, 0)], [3, Vector2i(1, 0)]]
+physics_layer_1/collision_layer = 0
+physics_layer_1/collision_mask = 8
+custom_data_layer_0/name = "can_spawn_apple"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "can_spawn_mob"
+custom_data_layer_1/type = 1
+custom_data_layer_2/name = "mob_type"
+custom_data_layer_2/type = 4
+sources/2 = SubResource("TileSetAtlasSource_xx2yb")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [2, Vector2i(0, 0)], [1, Vector2i(0, 0)], [3, Vector2i(1, 0)], [3, Vector2i(0, 0)], [2, Vector2i(1, 0)], [3, Vector2i(1, 0)], [2, Vector2i(2, 0)]]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtjinpgkarcrh"]
+
+[ext_resource type="Script" uid="uid://cidldj13r78bf" path="res://World/Mobs/Scripts/player.gd" id="1_6t5aa"]
+[ext_resource type="Script" uid="uid://cqh8q5xsjdcuu" path="res://World/Mobs/Scripts/body.gd" id="2_vgqql"]
+[ext_resource type="SpriteFrames" uid="uid://b8ul017wkvvch" path="res://World/Mobs/Resources/mob_sprite_default.tres" id="3_fkybt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h43o"]
+size = Vector2(16, 15.8)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_6t5aa")
+
+[node name="PlayerBody" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 31
+script = ExtResource("2_vgqql")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="PlayerBody"]
+unique_name_in_owner = true
+sprite_frames = ExtResource("3_fkybt")
+animation = &"Idle"
+autoplay = "Idle"
+centered = false
+
+[node name="CollisionShape" type="CollisionShape2D" parent="PlayerBody"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_7h43o")

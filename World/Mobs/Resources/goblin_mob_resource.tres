@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MobResource" load_steps=3 format=3 uid="uid://gvm15petnch2"]
+
+[ext_resource type="SpriteFrames" uid="uid://cbjhd15ttunpv" path="res://World/Mobs/Resources/goblin_sprite.tres" id="1_3pmic"]
+[ext_resource type="Script" uid="uid://cmos6s0rubv7o" path="res://World/Mobs/Scripts/mob_resource_script.gd" id="1_5v3at"]
+
+[resource]
+script = ExtResource("1_5v3at")
+name = "Default Mob"
+animated_sprite = ExtResource("1_3pmic")
+speed = 1
+metadata/_custom_type_script = "uid://cmos6s0rubv7o"

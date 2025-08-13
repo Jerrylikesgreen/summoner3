@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwruxuig7p3ex"]
+
+[ext_resource type="Script" uid="uid://1whv3g43ujug" path="res://World/Mobs/Scripts/mob_body.gd" id="1_jl05m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_glhkw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgjna"]
+size = Vector2(15.8, 15.8)
+
+[node name="MobBody" type="CharacterBody2D"]
+script = ExtResource("1_jl05m")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_glhkw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_hgjna")

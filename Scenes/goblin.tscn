@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://hfn507vyt2l4"]
+
+[ext_resource type="Script" uid="uid://dt6c342u5s4lb" path="res://World/Mobs/Scripts/goblin.gd" id="1_7w5cp"]
+[ext_resource type="Resource" uid="uid://gvm15petnch2" path="res://World/Mobs/Resources/goblin_mob_resource.tres" id="2_6n10i"]
+[ext_resource type="PackedScene" uid="uid://cwruxuig7p3ex" path="res://Scenes/mob_body.tscn" id="2_xcvi8"]
+
+[node name="Goblin" type="Node2D"]
+script = ExtResource("1_7w5cp")
+goblin_mob_resource = ExtResource("2_6n10i")
+
+[node name="MobBody" parent="." instance=ExtResource("2_xcvi8")]

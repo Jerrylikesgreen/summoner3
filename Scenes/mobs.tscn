@@ -1,11 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhe4uli3jieg5"]
+[gd_scene load_steps=2 format=3 uid="uid://dhe4uli3jieg5"]
 
 [ext_resource type="Script" uid="uid://bdslbotpqk78x" path="res://World/Mobs/Scripts/mobs.gd" id="1_cjrew"]
-[ext_resource type="Resource" uid="uid://b6cdbl0rkibhx" path="res://World/Mobs/Resources/mob_resource.tres" id="2_e4g5a"]
-[ext_resource type="PackedScene" uid="uid://dtjinpgkarcrh" path="res://Scenes/body.tscn" id="3_e4g5a"]
 
 [node name="Mobs" type="Node2D"]
 script = ExtResource("1_cjrew")
-active_resource = ExtResource("2_e4g5a")
-
-[node name="Body" parent="." instance=ExtResource("3_e4g5a")]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://xs6eblkps5nu"]
+
+[ext_resource type="Script" uid="uid://cy8nprdr23m27" path="res://World/Mobs/Scripts/mob.gd" id="1_u8nqw"]
+[ext_resource type="PackedScene" uid="uid://cwruxuig7p3ex" path="res://Scenes/mob_body.tscn" id="2_b44se"]
+
+[node name="Mob" type="Node2D"]
+script = ExtResource("1_u8nqw")
+
+[node name="MobBody" parent="." instance=ExtResource("2_b44se")]
+unique_name_in_owner = true
+position = Vector2(8, 8)

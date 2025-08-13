@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MobResource" load_steps=3 format=3 uid="uid://hogdfsdrjaii"]
+
+[ext_resource type="SpriteFrames" uid="uid://b8ul017wkvvch" path="res://World/Mobs/Resources/mob_sprite_default.tres" id="1_xt6ls"]
+[ext_resource type="Script" uid="uid://cmos6s0rubv7o" path="res://World/Mobs/Scripts/mob_resource_script.gd" id="2_q6xxh"]
+
+[resource]
+script = ExtResource("2_q6xxh")
+name = "Player"
+animated_sprite = ExtResource("1_xt6ls")
+speed = 1

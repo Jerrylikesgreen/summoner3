@@ -1,13 +1,18 @@
-class_name Body extends CharacterBody2D
+class_name PlayerBody extends CharacterBody2D
+
+
+
 
 @onready var body_sprite: AnimatedSprite2D = %BodySprite
-
 @export var step_px := 16
 @export var step_speed := 96.0  # px/sec
 var _dir := Vector2.ZERO
 var _remaining := 0.0
+var player_turn: bool = false
+
 
 func _unhandled_input(event: InputEvent) -> void:
+	if !player_turn: return
 	if not event.is_pressed(): return
 	if event is InputEventKey and event.echo: return
 	if _remaining > 0.0: return
