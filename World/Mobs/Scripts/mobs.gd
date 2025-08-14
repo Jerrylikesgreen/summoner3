@@ -4,9 +4,12 @@ extends Node2D
 @export var mobs_in_world: Array[Mob]
 @onready var player_refrence: Player = %Player
 @onready var turn_label: Label = %TurnLable
+@onready var objects: Objects = %Objects ## Tile map layer fo all Non Movable Object, Example Trees, Apples, Ect. 
 
 var _current_index: int = 0
 var _in_cycle := false
+var _current_mobs_turn: Mob
+var _current_target: Vector2
 
 func _ready() -> void:
 
@@ -20,13 +23,13 @@ func _ready() -> void:
 
 func _on_player_entered(player: Player) -> void:
 	if not mobs_in_world.has(player):
-		mobs_in_world.append(player)
+		mobs_in_world.push_front(player)
 		_register_mob(player)
+		_current_index = 0
+		_start_turn_cycle()  # makes player current + updates labels
+	_update_turn_order_label()
 
-		if mobs_in_world.size() == 1 and not _in_cycle:
-			_current_index = 0
-			_start_turn_cycle()
-	print("Player added to array")
+
 
 func _register_mob(mob: Mob) -> void:
 
@@ -63,12 +66,15 @@ func _start_turn_cycle() -> void:
 	var current_mob := mobs_in_world[_current_index]
 	if is_instance_valid(current_mob):
 		current_mob.current_turn = true
-		_update_turn_label(current_mob)
+		_update_turn_label(current_mob)        # "Current Turn: ..."
+		_update_turn_order_label()             # "Turn Order: Goblin, Goblin, ..."
 	else:
-
 		next_turn()
 
+
+
 func next_turn() -> void:
+	print("Next Turn -- ", )
 	if mobs_in_world.is_empty():
 		_in_cycle = false
 		return
@@ -78,6 +84,7 @@ func next_turn() -> void:
 
 func _on_mob_turn_started(mob: Mob) -> void:
 	_update_turn_label(mob)
+	Events.update_turn(mob)
 
 func _on_mob_turn_finished(mob: Mob) -> void:
 
@@ -88,5 +95,37 @@ func _on_mob_turn_finished(mob: Mob) -> void:
 		next_turn()
 
 func _update_turn_label(mob: Mob) -> void:
-	var name := mob.mob_name if mob.mob_name != "" else "Mob " + str(_current_index + 1)
-	turn_label.text = "Current Turn: " + name
+	turn_label.text = "Current Turn: " + _mob_display_name(mob)
+	_update_turn_order_label()
+
+func _update_turn_order_label() -> void:
+	var names: Array[String] = []
+	for m in mobs_in_world:
+		names.append(_mob_display_name(m))
+	turn_label.text += "\nTurn Order: " + ", ".join(names)
+	
+func _mob_display_name(m: Mob) -> String:
+	if m == null or !is_instance_valid(m):
+		return "<freed>"
+	if m.has_method("get_display_name"):
+		return m.get_display_name()
+	return "Mob"
+
+func _look_for_nearest_apple() -> Vector2:
+	var apples_in_map: Array[Vector2i] = objects.get_apples_from_map()
+	if apples_in_map.is_empty():
+		return global_position
+
+	var my_pos := global_position
+	var closest_world := my_pos
+	var min_dist := INF
+
+	for cell in apples_in_map:
+		var world_pos := objects.to_global(objects.map_to_local(cell))
+
+		var dist := my_pos.distance_to(world_pos)
+		if dist < min_dist:
+			min_dist = dist
+			closest_world = world_pos
+
+	return closest_world

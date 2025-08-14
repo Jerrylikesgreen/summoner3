@@ -11,8 +11,10 @@ size = Vector2(16, 15.8)
 script = ExtResource("1_6t5aa")
 
 [node name="PlayerBody" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 31
+motion_mode = 1
 script = ExtResource("2_vgqql")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="PlayerBody"]
@@ -25,3 +27,15 @@ centered = false
 [node name="CollisionShape" type="CollisionShape2D" parent="PlayerBody"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_7h43o")
+
+[node name="Turn_Marker" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -12.0
+offset_top = 16.0
+offset_right = 30.0
+offset_bottom = 39.0
+grow_horizontal = 2
+text = "Label"

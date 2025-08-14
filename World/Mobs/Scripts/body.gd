@@ -1,8 +1,6 @@
 class_name PlayerBody extends CharacterBody2D
 
 
-
-
 @onready var body_sprite: AnimatedSprite2D = %BodySprite
 @export var step_px := 16
 @export var step_speed := 96.0  # px/sec
@@ -30,6 +28,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	_remaining = float(step_px)
 	body_sprite.play("Moving")
+	Events.player_turn_ended()
+	player_turn = false
 
 func _physics_process(delta: float) -> void:
 	if _remaining <= 0.0: return

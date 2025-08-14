@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_5v3at")
-name = "Default Mob"
+name = "Goblin"
 animated_sprite = ExtResource("1_3pmic")
 speed = 1
 metadata/_custom_type_script = "uid://cmos6s0rubv7o"

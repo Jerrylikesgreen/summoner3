@@ -7,5 +7,3 @@
 script = ExtResource("1_u8nqw")
 
 [node name="MobBody" parent="." instance=ExtResource("2_b44se")]
-unique_name_in_owner = true
-position = Vector2(8, 8)

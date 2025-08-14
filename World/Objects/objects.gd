@@ -57,13 +57,17 @@ func spawn_mobs_from_map() -> void:
 			push_warning("Scene for %s is not a Mob (got different base)" % mob_type)
 			continue
 
-		# Center of the cell in GLOBAL space
 		var local_pos: Vector2 = map_to_local(cell)
 		var tile_sz: Vector2 = Vector2(tile_set.tile_size) 
-		mob.global_position = to_global(local_pos + tile_sz * 0.5)
+		mob.global_position = to_global(local_pos + tile_sz)
 		mobs.add_child(mob)
 		mobs.mobs_in_world.append(mob)
+		mobs.looking_for_apples.connect()
 		_spawned_mobs[cell] = mob
+
+func _on_looking_for_apples()->void:
+	
+	pass
 
 
 func get_mob_spawn_cells() -> Array[Vector2i]:
@@ -95,7 +99,7 @@ func is_tree_spawner(cell: Vector2i) -> bool:
 
 func get_spawnable_trees() -> Array[Vector2i]:
 	var out: Array[Vector2i] = []
-	for c in get_used_cells():
+	for c in get_used_cells_by_id():
 		if is_tree_spawner(c):
 			out.append(c)
 	return out
@@ -133,3 +137,9 @@ func spawn_apple_next_to_tree(tree_cell: Vector2i) -> void:
 		return
 	var src := get_cell_source_id(tree_cell)
 	set_cell(spot, src, ATLAS_APPLE, 0)
+
+func get_apples_from_map()->Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	for a in get_used_cells_by_id(-1, ATLAS_APPLE):
+			out.append(a)
+	return out

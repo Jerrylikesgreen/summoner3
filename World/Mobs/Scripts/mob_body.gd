@@ -1,6 +1,7 @@
 class_name MobBody
 extends CharacterBody2D
 
+signal step_finished(success: bool)   # â ADD
 @onready var body_sprite: AnimatedSprite2D = %BodySprite
 
 @export var step_px: int = 16
@@ -48,30 +49,29 @@ func take_turn() -> void:
 	if _remaining > 0.0:
 		body_sprite.play("Moving")
 
-
 func _physics_process(delta: float) -> void:
 	if _remaining <= 0.0:
 		return
 
 	var step = min(step_speed * delta, _remaining)
 	var motion = _dir * step
-	var collision = move_and_collide(motion)
+	var collision := move_and_collide(motion)
+
 	if collision:
-		# Hit something; stop this turn (keep target so future turns can try again, if desired)
 		_remaining = 0.0
 		body_sprite.play("Idle")
 		if snap_to_grid_on_stop:
 			global_position = global_position.snapped(Vector2(step_px, step_px))
+		emit_signal("step_finished", false) # â emit here if blocked
 		return
 
 	_remaining -= step
 	if _remaining <= 0.0:
-		# Finished the step
 		body_sprite.play("Idle")
 		if snap_to_grid_on_stop:
 			global_position = global_position.snapped(Vector2(step_px, step_px))
-		# Optional: auto-queue next step if you want continuous stepping without extra turns.
-		# take_turn()
+		emit_signal("step_finished", true)  # â emit here if finished
+
 
 func is_on_target(delta: Vector2) -> bool:
 	# Consider within half a pixel as "on target"
@@ -90,3 +90,4 @@ func choose_step_dir(delta: Vector2) -> Vector2:
 		return Vector2(0, dy)
 	else:
 		return Vector2.ZERO
+		
