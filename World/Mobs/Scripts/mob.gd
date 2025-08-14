@@ -30,19 +30,23 @@ var _current_turn: bool = false
 			return
 		_current_turn = value
 		if _current_turn:
-			# turn begins
+			print("[Mob] set current_turn TRUE for", display_name())
 			emit_signal("turn_started", self)
 			_on_turn_started()
 		else:
-			# turn visually/locally ends (no "finished" signal here)
+			print("[Mob] set current_turn FALSE for", self)
 			_on_turn_ended()
+	get:
+		return _current_turn
+
 
 func _ready() -> void:
-	# Initialize marker to reflect initial export value
-	if _current_turn:
+	# Reflect initial state using the property (not the backing field)
+	if current_turn:
 		_on_turn_started()
 	else:
 		_on_turn_ended()
+
 
 func get_display_name() -> String:
 	if data and data.name != "":
@@ -56,17 +60,22 @@ func get_display_name() -> String:
 func _on_turn_started() -> void:
 	if is_instance_valid(turn_marker):
 		turn_marker.text = "Turn - Active"
-		print("Turn started received: ", self)
+		print("Turn started received: ", display_name())
 
 func _on_turn_ended() -> void:
 	if is_instance_valid(turn_marker):
 		turn_marker.text = "Turn - Inactive"
-		print("Turn End received: ", self)
+		print("Turn End received: ", display_name())
+		
+func display_name() -> String:
+	if data and data.name != "": return data.name
+	if mob_name != "": return mob_name
+	return name  # scene tree name fallback
 
-# Call this when the mob finishes acting
+
 func end_turn() -> void:
 	if _current_turn:
 		# Use the property to ensure setter/UI flows run
 		current_turn = false
 		emit_signal("turn_finished", self)
-		print("Turn End called: ", self)
+		print("Turn End called: ", display_name())

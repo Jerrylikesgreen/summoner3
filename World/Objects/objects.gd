@@ -62,7 +62,7 @@ func spawn_mobs_from_map() -> void:
 		mob.global_position = to_global(local_pos + tile_sz)
 		mobs.add_child(mob)
 		mobs.mobs_in_world.append(mob)
-		mobs.looking_for_apples.connect()
+		#mobs.looking_for_apples.connect()
 		_spawned_mobs[cell] = mob
 
 func _on_looking_for_apples()->void:

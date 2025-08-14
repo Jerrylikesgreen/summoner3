@@ -1,7 +1,7 @@
 class_name MobBody
 extends CharacterBody2D
 
-signal step_finished(success: bool)   # â ADD
+signal step_finished(success: bool)  
 @onready var body_sprite: AnimatedSprite2D = %BodySprite
 
 @export var step_px: int = 16

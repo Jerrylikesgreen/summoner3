@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwruxuig7p3ex"]
+[gd_scene load_steps=4 format=3 uid="uid://cwruxuig7p3ex"]
 
 [ext_resource type="Script" uid="uid://1whv3g43ujug" path="res://World/Mobs/Scripts/mob_body.gd" id="1_jl05m"]
+[ext_resource type="SpriteFrames" uid="uid://b8ul017wkvvch" path="res://World/Mobs/Resources/mob_sprite_default.tres" id="2_jl05m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hgjna"]
 size = Vector2(16, 16)
@@ -14,7 +15,8 @@ script = ExtResource("1_jl05m")
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-8, -16)
-animation = &""
+sprite_frames = ExtResource("2_jl05m")
+animation = &"Idle"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
